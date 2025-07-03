@@ -1,0 +1,146 @@
+import { useState } from "react";
+import { FaRegUser, FaUnlockAlt } from "react-icons/fa";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import logo from "../../assets/Logo.png";
+import "./Navbar.css";
+
+const Navbar = ({ showLogin, setShowLogin, isLoggedIn, setIsLoggedIn }) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const isLeaveModule = location.pathname.startsWith("/leave");
+  const isAppointmentModule = location.pathname.startsWith("/appointment");
+
+  const toggleLogin = () => {
+    if (isLoggedIn) {
+      localStorage.removeItem("token");
+      setIsLoggedIn(false);
+      setShowLogin(false);
+      navigate("/");
+    } else {
+      setShowLogin((prev) => !prev);
+    }
+  };
+
+  const handleAddAction = () => {
+    if (!isLoggedIn) {
+      alert("Please login as admin to proceed.");
+      return;
+    }
+
+    if (isLeaveModule) {
+      navigate("/leave/leave/form");
+    } else if (isAppointmentModule) {
+      navigate("/appointment", { state: { openForm: true } });
+    }
+  };
+
+  const handleLoginSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        localStorage.setItem("token", data.token);
+        setIsLoggedIn(true);
+        setShowLogin(false);
+      } else {
+        alert(data.message || "Invalid credentials.");
+      }
+    } catch (err) {
+      alert("Server error during login.");
+      console.error(err);
+    }
+  };
+
+  return (
+    <>
+      <nav className="navbar">
+        <div className="navbar-left">
+          <Link to="/">
+            <img
+              src={logo}
+              alt="Logo"
+              className="logo"
+              style={{ cursor: "pointer" }}
+            />
+          </Link>
+        </div>
+
+        <div className="navbar-center">
+          <h1 className="main-heading">पूर्व तट रेलवे</h1>
+          <h2 className="sub-heading">(EAST COAST RAILWAY)</h2>
+        </div>
+
+        <div className="navbar-right">
+          {isLoggedIn && (isLeaveModule || isAppointmentModule) && (
+            <button
+              className="add-appointment-btn"
+              onClick={handleAddAction}
+              style={{ marginRight: "10px" }}
+            >
+              {isLeaveModule ? "Add Leave" : "Add Appointment"}
+            </button>
+          )}
+
+          <button className="login-btn" onClick={toggleLogin}>
+            {isLoggedIn ? "Logout" : "Login"}
+          </button>
+        </div>
+      </nav>
+
+      {showLogin && !isLoggedIn && (
+        <div className="login-form-container">
+          <div className="text">
+            <h2 className="heading">IRCTC official Login</h2>
+            <p className="para">Access the appointment management system</p>
+          </div>
+          <form className="login-form" onSubmit={handleLoginSubmit}>
+            <label>
+              Username
+              <div className="input-wrapperr">
+                <FaRegUser className="input-icon" />
+                <input
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="Enter your Username"
+                  required
+                  className="login-inputt"
+                />
+              </div>
+            </label>
+            <label>
+              Password
+              <div className="input-wrapperr">
+                <FaUnlockAlt className="input-icon" />
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter your Password"
+                  required
+                  className="login-inputt"
+                />
+              </div>
+            </label>
+            <button type="submit" className="submit-btn">
+              Submit
+            </button>
+          </form>
+        </div>
+      )}
+    </>
+  );
+};
+
+export default Navbar;
