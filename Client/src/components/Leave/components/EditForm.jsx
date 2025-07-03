@@ -21,7 +21,17 @@ function EditForm() {
     const fetchLeave = async () => {
       try {
         const res = await axios.get(`http://localhost:5000/api/leaves/${id}`);
-        setFormData(res.data);
+        const data = res.data;
+
+        setFormData({
+          officer: data.officer || "",
+          designation: data.designation || "",
+          from: data.from ? new Date(data.from).toISOString().slice(0, 10) : "",
+          to: data.to ? new Date(data.to).toISOString().slice(0, 10) : "",
+          outTo: data.outTo || "",
+          purpose: data.purpose || "",
+          type: data.type || "Leave",
+        });
       } catch (err) {
         console.error("Failed to fetch leave:", err);
       }
@@ -29,7 +39,6 @@ function EditForm() {
 
     fetchLeave();
   }, [id]);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -121,8 +130,12 @@ function EditForm() {
           <option value="Leave">Leave</option>
           <option value="Duty">Duty</option>
         </select>
-
-        <button type="submit">Update Leave</button>
+        <div style={{ display: "flex", gap: "10px" }}>
+          <button type="submit">Update Leave</button>
+          <button type="button" onClick={() => navigate("/leave")}>
+            Back
+          </button>
+        </div>
       </form>
     </div>
   );

@@ -68,7 +68,19 @@ router.get("/past", async (req, res) => {
   }
 });
 
-// PUT (edit) a leave by ID (admin only)
+router.get("/:id", async (req, res) => {
+  try {
+    const leave = await Leave.findById(req.params.id);
+    if (!leave) {
+      return res.status(404).json({ message: "Leave not found" });
+    }
+    res.json(leave);
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Failed to fetch leave", error: err.message });
+  }
+});
 router.put("/:id", authenticateToken, async (req, res) => {
   try {
     const updatedLeave = await Leave.findByIdAndUpdate(

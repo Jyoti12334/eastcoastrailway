@@ -1,4 +1,4 @@
- /* Popup overlay covers whole screen and sits on top */
+/* Popup overlay covers whole screen and sits on top */
 .popup-overlay {
   position: fixed;
   top: 0;
@@ -18,13 +18,16 @@
   border-radius: 12px;
   padding: 20px 30px;
   width: 600px;
-  max-height: 75vh; /* max 75% viewport height */
+  max-height: 90vh; /* max 75% viewport height */
   overflow-y: auto; /* scroll if content overflows */
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  font-family: "Segoe UI", sans-serif;
   box-sizing: border-box;
   z-index: 1101;
   margin-top: 60px;
+}
+.appointment-form-container::-webkit-scrollbar {
+  display: none;
 }
 
 /* Title */
@@ -86,7 +89,7 @@
   font-size: 15px;
   outline: none;
   resize: vertical;
-  min-height: 60px;  /* smaller height */
+  min-height: 60px; /* smaller height */
   max-height: 100px; /* max height */
 }
 
@@ -172,7 +175,7 @@ button[type="button"]:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -183,7 +186,7 @@ button[type="button"]:hover {
   background: #fff;
   padding: 20px 30px;
   border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   text-align: center;
 }
 

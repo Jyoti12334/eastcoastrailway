@@ -37,7 +37,7 @@ function Leave({ showLogin, isLoggedIn }) {
         }
       />
       <Route
-        path="/edit/:id"
+        path="edit/:id"
         element={
           isLoggedIn ? <EditForm /> : <p>Please login to access this page.</p>
         }

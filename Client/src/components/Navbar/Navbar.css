@@ -1,152 +1,176 @@
 /* Your existing navbar.css content... */
 * {
-    margin: 0;
-    padding: 0;
-    
-  }
-  
-  .navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #003366;
-    padding: 10px 50px;
-    color: white;
-    flex-wrap: wrap;
-   
-    position: fixed;         /* Sticks to top */
+  margin: 0;
+  padding: 0;
+}
+
+.login-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(8px);
+  background-color: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #003366;
+  padding: 10px 50px;
+  color: white;
+  flex-wrap: wrap;
+
+  position: fixed; /* Sticks to top */
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 1000;  
-      /* High priority layer */
-  
-  }
-  
-  .navbar-left img.logo {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-    animation: slideInLeft 0.8s ease-in-out;
-  }
-  
-  .navbar-center {
-    text-align: center;
-    flex-grow: 1;
-    animation: fadeIn 1s ease-in-out;
-  }
-  
-  .main-heading {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .sub-heading {
-    font-size: 16px;
-    margin-top: 5px;
-  }
-  
-  .navbar-right {
-    animation: slideInRight 0.8s ease-in-out;
-  }
-  
-  .login-btn {
-    padding: 8px 20px;
-    margin-right: 100px;
-    background-color: #1e558d;
-    border: none;
-    color: white;
-    font-size: 15px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .login-btn:hover {
-    background-color: #fff;
-    transform: scale(1.05);
-    color: #003366;
-  }
-  
-  /* Animations */
-  @keyframes slideInLeft {
-    from { transform: translateX(-50px); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-  }
-  
-  @keyframes slideInRight {
-    from { transform: translateX(50px); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-  }
-  
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  
-  .login-form-container {
-    position: fixed;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(1); /* center horizontally & vertically */
-    background-color: #fff;
-    width: 90%;
-    max-width: 450px;
-    animation:  zoomOut 0.4s ease-in-out;
-    z-index: 999; /* Above other elements */
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-  }
-  @keyframes zoomOut {
-    from {
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(0.8);
-    }
-    to {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-    }
-  }
-  
-  
-  
-  .login-form {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-   
-   
-    gap: 20px;
-  }
+  z-index: 1000;
+  /* High priority layer */
+}
 
-  .input-wrapperr {
-    position: relative;
-    width: 100%;
-  }
-  
-  .input-icon {
-    position: absolute;
-    top: 50%;
-    left: 10px;
-    transform: translateY(-50%);
-    color: #888;
-    font-size: 18px;
-  }
-  
-  
-  
-  .login-inputt {
-    width: 87%;
-    padding: 10px 10px 10px 36px;
-  
-    font-size: 16px;
-    margin-top: 4px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+.navbar-left img.logo {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  animation: slideInLeft 0.8s ease-in-out;
+}
 
+.navbar-center {
+  text-align: center;
+  flex-grow: 1;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.main-heading {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.sub-heading {
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+.navbar-right {
+  animation: slideInRight 0.8s ease-in-out;
+}
+
+.login-btn {
+  padding: 8px 20px;
+  margin-right: 100px;
+  background-color: #1e558d;
+  border: none;
+  color: white;
+  font-size: 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+  background-color: #fff;
+  transform: scale(1.05);
+  color: #003366;
+}
+
+/* Animations */
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-50px);
+    opacity: 0;
   }
-  
-  .button-group {
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.login-form-container {
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1); /* center horizontally & vertically */
+  background-color: #fff;
+  width: 90%;
+  max-width: 450px;
+  animation: zoomOut 0.4s ease-in-out;
+  z-index: 999; /* Above other elements */
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+@keyframes zoomOut {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.login-form {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+
+  gap: 20px;
+}
+
+.input-wrapperr {
+  position: relative;
+  width: 100%;
+}
+
+.input-icon {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  color: #888;
+  font-size: 18px;
+}
+
+.login-inputt {
+  width: 87%;
+  padding: 10px 10px 10px 36px;
+
+  font-size: 16px;
+  margin-top: 4px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.button-group {
   display: flex;
   justify-content: space-between;
   gap: 10px;
@@ -185,49 +209,36 @@
   background-color: #bbb;
 }
 
-  
-  /* Responsive */
-  @media screen and (max-width: 768px) {
-    .navbar {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-  
-    .navbar-left,
-    .navbar-right {
-      margin: 10px 0;
-    }
-  
-   
-  }
-  .text{
-    display: flex;
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .navbar {
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    background-color: #003366;
-    color: #fff;
-    padding: 30px 50px;
+    text-align: center;
   }
 
+  .navbar-left,
   .navbar-right {
+    margin: 10px 0;
+  }
+}
+.text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  background-color: #003366;
+  color: #fff;
+  padding: 30px 50px;
+}
+
+.navbar-right {
   display: flex;
   align-items: center;
   gap: 10px; /* space between buttons */
 }
-
-
-
-
-
-
-
-
-
-
 
 /* Popup Modal Overlay for Appointment Form */
 .appointment-modal-overlay {
@@ -237,7 +248,7 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1500;  /* above navbar */
+  z-index: 1500; /* above navbar */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -247,8 +258,12 @@
 }
 
 @keyframes fadeInOverlay {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* Appointment form popup container inside modal overlay */
@@ -259,8 +274,7 @@
   width: 90%;
   max-width: 600px;
   padding: 30px 40px;
-  font-family: 'Segoe UI', sans-serif;
-   
+  font-family: "Segoe UI", sans-serif;
 
   /* Zoom in animation */
   animation: zoomInPopup 0.3s ease forwards;
@@ -290,5 +304,3 @@
     margin: 10px 0;
   }
 }
-
-

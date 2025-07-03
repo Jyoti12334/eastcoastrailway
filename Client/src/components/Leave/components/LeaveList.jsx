@@ -10,6 +10,7 @@ import "./LeaveList.css";
 
 const LeaveList = ({ fromDate, toDate, isLoggedIn, showLogin }) => {
   const [leaves, setLeaves] = useState([]);
+  const [editingLeaveId, setEditingLeaveId] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -74,7 +75,7 @@ const LeaveList = ({ fromDate, toDate, isLoggedIn, showLogin }) => {
       alert("Please login to edit leaves.");
       return;
     }
-    navigate(`/edit/${leave._id}`);
+    navigate(`/leave/edit/${leave._id}`);
   };
 
   const handleDelete = async (id) => {

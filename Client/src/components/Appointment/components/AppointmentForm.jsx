@@ -8,9 +8,12 @@ import {
 } from "react-icons/fa";
 import "./AppointmentForm.css";
 
-const AppointmentForm = ({ showForm, setShowForm, onClose, fetchAppointments }) => {
-
-
+const AppointmentForm = ({
+  showForm,
+  setShowForm,
+  onClose,
+  fetchAppointments,
+}) => {
   const [formData, setFormData] = useState({
     date: "",
     time: "",
@@ -22,30 +25,29 @@ const AppointmentForm = ({ showForm, setShowForm, onClose, fetchAppointments }) 
 
   if (!showForm) return null;
 
-   const isToday = (dateString) => {
-  const selected = new Date(dateString);
-  const today = new Date();
-  return (
-    selected.getFullYear() === today.getFullYear() &&
-    selected.getMonth() === today.getMonth() &&
-    selected.getDate() === today.getDate()
-  );
-};
-
+  const isToday = (dateString) => {
+    const selected = new Date(dateString);
+    const today = new Date();
+    return (
+      selected.getFullYear() === today.getFullYear() &&
+      selected.getMonth() === today.getMonth() &&
+      selected.getDate() === today.getDate()
+    );
+  };
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
 
     if (name === "time" && formData.date) {
-    const now = new Date();
-    const selectedDateTime = new Date(`${formData.date}T${value}`);
+      const now = new Date();
+      const selectedDateTime = new Date(`${formData.date}T${value}`);
 
-    if (isToday(formData.date) && selectedDateTime < now) {
-      alert("You cannot select a past time for today's date.");
-      return; // Don't update state with invalid time
+      if (isToday(formData.date) && selectedDateTime < now) {
+        alert("You cannot select a past time for today's date.");
+        return; // Don't update state with invalid time
+      }
     }
-  }
-  
+
     setFormData((prev) => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value,
@@ -55,26 +57,23 @@ const AppointmentForm = ({ showForm, setShowForm, onClose, fetchAppointments }) 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    
+    const now = new Date();
+    const selectedDateTime = new Date(`${formData.date}T${formData.time}`);
 
-   const now = new Date();
-  const selectedDateTime = new Date(`${formData.date}T${formData.time}`);
+    if (selectedDateTime < now) {
+      alert("You cannot select a past date or time.");
+      return;
+    }
 
-  if (selectedDateTime < now) {
-    alert("You cannot select a past date or time.");
-    return;
-  }
-
-  const payload = {
-    date: formData.date,
-    time: formData.time,
-    meetingWith: formData.name,
-    designation: formData.designation,
-    purpose: formData.purpose,
-    vip: formData.vip,
-    venue: "IRCTC Office",
-  };
-
+    const payload = {
+      date: formData.date,
+      time: formData.time,
+      meetingWith: formData.name,
+      designation: formData.designation,
+      purpose: formData.purpose,
+      vip: formData.vip,
+      venue: "IRCTC Office",
+    };
 
     try {
       const token = localStorage.getItem("token");
@@ -95,13 +94,12 @@ const AppointmentForm = ({ showForm, setShowForm, onClose, fetchAppointments }) 
       const data = await res.json();
 
       if (res.ok) {
-  alert("Appointment added successfully!");
- 
-  handleReset();
-  setShowForm(false);
-  if (fetchAppointments) fetchAppointments();
-}
-else {
+        alert("Appointment added successfully!");
+
+        handleReset();
+        setShowForm(false);
+        if (fetchAppointments) fetchAppointments();
+      } else {
         alert("Error: " + data.message);
       }
     } catch (error) {
@@ -140,7 +138,7 @@ else {
                 name="date"
                 value={formData.date}
                 onChange={handleChange}
-                 min={new Date().toISOString().split("T")[0]}
+                min={new Date().toISOString().split("T")[0]}
                 required
               />
             </div>
@@ -156,16 +154,18 @@ else {
                 value={formData.time}
                 onChange={handleChange}
                 min={
-  isToday(formData.date)
-    ? (() => {
-        const now = new Date();
-        const hours = String(now.getHours()).padStart(2, "0");
-        const minutes = String(now.getMinutes()).padStart(2, "0");
-        return `${hours}:${minutes}`;
-      })()
-    : "00:00"
-}
-
+                  isToday(formData.date)
+                    ? (() => {
+                        const now = new Date();
+                        const hours = String(now.getHours()).padStart(2, "0");
+                        const minutes = String(now.getMinutes()).padStart(
+                          2,
+                          "0"
+                        );
+                        return `${hours}:${minutes}`;
+                      })()
+                    : "00:00"
+                }
                 required
               />
             </div>
@@ -231,7 +231,7 @@ else {
 
           <div className="button-group">
             <button type="reset" onClick={handleReset}>
-              Clear 
+              Clear
             </button>
             <button type="submit">Add</button>
             <button type="button" onClick={returnToHomepage}>

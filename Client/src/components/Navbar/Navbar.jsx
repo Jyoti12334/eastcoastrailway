@@ -99,44 +99,62 @@ const Navbar = ({ showLogin, setShowLogin, isLoggedIn, setIsLoggedIn }) => {
       </nav>
 
       {showLogin && !isLoggedIn && (
-        <div className="login-form-container">
-          <div className="text">
-            <h2 className="heading">IRCTC official Login</h2>
-            <p className="para">Access the appointment management system</p>
+        <div className="login-modal-backdrop">
+          <div className="login-form-container">
+            <div className="login-form-container">
+              <div className="text">
+                <h2 className="heading">IRCTC official Login</h2>
+                <p className="para">Access the appointment management system</p>
+              </div>
+              <form className="login-form" onSubmit={handleLoginSubmit}>
+                <label>
+                  Username
+                  <div className="input-wrapperr">
+                    <FaRegUser className="input-icon" />
+                    <input
+                      type="text"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                      placeholder="Enter your Username"
+                      required
+                      className="login-inputt"
+                    />
+                  </div>
+                </label>
+                <label>
+                  Password
+                  <div className="input-wrapperr">
+                    <FaUnlockAlt className="input-icon" />
+                    <input
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      placeholder="Enter your Password"
+                      required
+                      className="login-inputt"
+                    />
+                  </div>
+                </label>
+                <div style={{ display: "flex", gap: "10px" }}>
+                  <button type="submit" className="submit-btn">
+                    Submit
+                  </button>
+                  <button
+                    style={{
+                      flex: "1",
+                      backgroundColor: "grey",
+                      color: "black",
+                    }}
+                    onClick={() => setShowLogin(false)}
+                    type="submit"
+                    className="submit-btn1"
+                  >
+                    Back
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
-          <form className="login-form" onSubmit={handleLoginSubmit}>
-            <label>
-              Username
-              <div className="input-wrapperr">
-                <FaRegUser className="input-icon" />
-                <input
-                  type="text"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  placeholder="Enter your Username"
-                  required
-                  className="login-inputt"
-                />
-              </div>
-            </label>
-            <label>
-              Password
-              <div className="input-wrapperr">
-                <FaUnlockAlt className="input-icon" />
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Enter your Password"
-                  required
-                  className="login-inputt"
-                />
-              </div>
-            </label>
-            <button type="submit" className="submit-btn">
-              Submit
-            </button>
-          </form>
         </div>
       )}
     </>
