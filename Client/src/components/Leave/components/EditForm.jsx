@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./EditForm.css";
 
-function EditForm() {
-  const { id } = useParams();
+function EditForm({ id, onClose, onSave }) {
+  // const { id } = useParams();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -25,7 +25,7 @@ function EditForm() {
         setFormData({
           officer: data.officer || "",
           from: data.from ? new Date(data.from).toISOString().slice(0, 10) : "",
-  to: data.to ? new Date(data.to).toISOString().slice(0, 10) : "",
+          to: data.to ? new Date(data.to).toISOString().slice(0, 10) : "",
           outTo: data.outTo || "",
           purpose: data.purpose || "",
           type: data.type || "Leave",
@@ -56,7 +56,7 @@ function EditForm() {
         },
       });
       alert("Leave updated successfully!");
-      navigate("/leave");
+      onSave();
     } catch (err) {
       console.error("Update failed:", err);
       alert("Failed to update leave.");
@@ -121,10 +121,12 @@ function EditForm() {
           <option value="Leave">Leave</option>
           <option value="Duty">Duty</option>
         </select>
-        <div style={{ display: "flex", gap: "10px" }}>
+        <div
+          style={{ display: "flex", gap: "10px", justifyContent: "flex-end" }}
+        >
           <button type="submit">Update Leave</button>
-          <button type="button" onClick={() => navigate("/leave")}>
-            Back
+          <button type="button" onClick={onClose}>
+            Cancel
           </button>
         </div>
       </form>

@@ -5,6 +5,37 @@
   font-family: "Segoe UI", Roboto, sans-serif;
 }
 
+.floating-edit-form::-webkit-scrollbar {
+  display: none;
+}
+.blurred-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.04);
+  z-index: 9998;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.floating-edit-form {
+  background: white;
+  border-radius: 12px;
+  padding: 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow: hidden;
+  z-index: 9999;
+  transform: translateZ(0);
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
 /* Title */
 .section-title {
   font-size: 26px;
@@ -50,7 +81,6 @@
   gap: 20px;
   transition: background-color 0.3s ease-in-out;
 }
-
 
 .back-btn-container {
   text-align: center;

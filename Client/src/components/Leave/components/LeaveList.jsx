@@ -6,6 +6,7 @@ import { LiaUserTieSolid } from "react-icons/lia";
 import { MdDeleteOutline, MdOutlineDateRange } from "react-icons/md";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./LeaveList.css";
+import EditForm from "./EditForm";
 
 const LeaveList = ({ fromDate, toDate, isLoggedIn, showLogin }) => {
   const [leaves, setLeaves] = useState([]);
@@ -74,7 +75,8 @@ const LeaveList = ({ fromDate, toDate, isLoggedIn, showLogin }) => {
       alert("Please login to edit leaves.");
       return;
     }
-    navigate(`/leave/edit/${leave._id}`);
+    setEditingLeaveId(leave._id);
+    // navigate(`/leave/edit/${leave._id}`);
   };
 
   const handleDelete = async (id) => {
@@ -149,6 +151,20 @@ const LeaveList = ({ fromDate, toDate, isLoggedIn, showLogin }) => {
             {leave.type}
           </span>
         </div>
+        {editingLeaveId && (
+          <div className="blurred-backdrop">
+            <div className="floating-edit-form">
+              <EditForm
+                id={editingLeaveId}
+                onClose={() => setEditingLeaveId(null)}
+                onSave={() => {
+                  fetchLeaves();
+                  setEditingLeaveId(null);
+                }}
+              />
+            </div>
+          </div>
+        )}
       </div>
     );
   };
@@ -204,13 +220,12 @@ const LeaveList = ({ fromDate, toDate, isLoggedIn, showLogin }) => {
         <div>
           <span className="color-box future"></span>Future
         </div>
-       
       </div>
       <div className="back-btn-container">
-          <button className="back-btn" onClick={() => navigate("/")}>
-            ← Back to Home
-          </button>
-        </div>
+        <button className="back-btn" onClick={() => navigate("/")}>
+          ← Back to Home
+        </button>
+      </div>
     </div>
   );
 };
