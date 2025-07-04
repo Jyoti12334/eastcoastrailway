@@ -62,10 +62,10 @@ function HomePageSelector() {
     >
       <div style={sectionStyle}>
         <h1 style={{ fontSize: "3rem", fontWeight: "bold", color: "#333" , marginTop: "150px"}}>
-          Welcome to IRCTC Admin Portal
+          Welcome to Admin Portal
         </h1>
         <p style={{ fontSize: "1.2rem", color: "#555", maxWidth: "800px", margin: "0 auto", marginTop: "10px" }}>
-          Efficiently manage all appointments and staff leave requests from one centralized platform.
+          Efficiently manage all appointments and staff leaves and tours from one centralized platform.
         </p>
 
         <div
@@ -90,9 +90,9 @@ function HomePageSelector() {
             }}
           >
             <FaSuitcase style={{ fontSize: "3rem", color: "#1976d2" }} />
-            <h2 style={{ marginTop: "20px" }}>Leave Management</h2>
+            <h2 style={{ marginTop: "20px" }}>Leave and Tour Management</h2>
             <p style={{ color: "#555", margin: "10px 0 20px" }}>
-              Monitor and approve leave requests easily.
+              Monitor leave and tours easily.
             </p>
             <button style={buttonStyle}>Enter Leave System</button>
           </div>

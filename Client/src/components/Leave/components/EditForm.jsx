@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import "./EditForm.css";
 
 function EditForm() {
@@ -9,7 +9,6 @@ function EditForm() {
 
   const [formData, setFormData] = useState({
     officer: "",
-    designation: "",
     from: "",
     to: "",
     outTo: "",
@@ -25,9 +24,8 @@ function EditForm() {
 
         setFormData({
           officer: data.officer || "",
-          designation: data.designation || "",
           from: data.from ? new Date(data.from).toISOString().slice(0, 10) : "",
-          to: data.to ? new Date(data.to).toISOString().slice(0, 10) : "",
+  to: data.to ? new Date(data.to).toISOString().slice(0, 10) : "",
           outTo: data.outTo || "",
           purpose: data.purpose || "",
           type: data.type || "Leave",
@@ -39,6 +37,7 @@ function EditForm() {
 
     fetchLeave();
   }, [id]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -75,14 +74,6 @@ function EditForm() {
           value={formData.officer}
           onChange={handleChange}
           required
-        />
-
-        <label>Designation</label>
-        <input
-          type="text"
-          name="designation"
-          value={formData.designation}
-          onChange={handleChange}
         />
 
         <label>From Date</label>

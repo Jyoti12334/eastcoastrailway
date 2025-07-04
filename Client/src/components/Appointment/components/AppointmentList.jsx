@@ -14,7 +14,10 @@ import {
   MdToday,
   MdUpcoming,
 } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 import "./AppointmentList.css";
+
+
 
 const AppointmentList = ({ fromDate, toDate, isLoggedIn, setFetchAppointmentsRef }) => {
 
@@ -51,6 +54,8 @@ const AppointmentList = ({ fromDate, toDate, isLoggedIn, setFetchAppointmentsRef
     setFetchAppointmentsRef(() => fetchAppointments);
   }
 }, []);
+
+const navigate = useNavigate();
 
   const today = new Date().toISOString().split("T")[0];
   const getTomorrowDate = () => {
@@ -294,7 +299,25 @@ const AppointmentList = ({ fromDate, toDate, isLoggedIn, setFetchAppointmentsRef
         {appointments.length === 0 && (
           <p className="no-appointments">No appointments to show.</p>
         )}
+         <div className="legend">
+        <div>
+          <span className="color-box today"></span>Today
+        </div>
+        <div>
+          <span className="color-box tomorrow"></span>Tomorrow
+        </div>
+        <div>
+          <span className="color-box future"></span>Future
+        </div>
+       
       </div>
+         <div className="back-btn-container">
+          <button className="back-btn" onClick={() => navigate("/")}>
+            ← Back to Home
+          </button>
+        </div>
+      </div>
+      
 
       {editingAppointment && (
         <div className="modal-overlay" onClick={closeEditModal}>
@@ -384,7 +407,9 @@ const AppointmentList = ({ fromDate, toDate, isLoggedIn, setFetchAppointmentsRef
               </div>
             </form>
           </div>
+          
         </div>
+        
       )}
     </>
   );

@@ -127,7 +127,7 @@ const AppointmentForm = ({
     <div className="popup-overlay">
       <div className="appointment-form-container popup-box">
         <h2>Add New Appointment</h2>
-        <p>Enter details to schedule a new appointment</p>
+      
         <form onSubmit={handleSubmit}>
           <label>
             Date

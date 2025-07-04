@@ -103,8 +103,8 @@ const Navbar = ({ showLogin, setShowLogin, isLoggedIn, setIsLoggedIn }) => {
           <div className="login-form-container">
             <div className="login-form-container">
               <div className="text">
-                <h2 className="heading">IRCTC official Login</h2>
-                <p className="para">Access the appointment management system</p>
+                <h2 className="heading">Admin official Login</h2>
+                <p className="para">Access the management systems</p>
               </div>
               <form className="login-form" onSubmit={handleLoginSubmit}>
                 <label>
@@ -143,7 +143,7 @@ const Navbar = ({ showLogin, setShowLogin, isLoggedIn, setIsLoggedIn }) => {
                     style={{
                       flex: "1",
                       backgroundColor: "grey",
-                      color: "black",
+                      color: "white",
                     }}
                     onClick={() => setShowLogin(false)}
                     type="submit"

@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
 import { CiEdit } from "react-icons/ci";
-import { MdOutlineDateRange } from "react-icons/md";
 import { GoClock } from "react-icons/go";
-import { LiaUserTieSolid } from "react-icons/lia";
 import { IoDocumentTextOutline } from "react-icons/io5";
-import { MdDeleteOutline } from "react-icons/md";
+import { LiaUserTieSolid } from "react-icons/lia";
+import { MdDeleteOutline, MdOutlineDateRange } from "react-icons/md";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./LeaveList.css";
 
 const LeaveList = ({ fromDate, toDate, isLoggedIn, showLogin }) => {
@@ -205,10 +204,13 @@ const LeaveList = ({ fromDate, toDate, isLoggedIn, showLogin }) => {
         <div>
           <span className="color-box future"></span>Future
         </div>
-        <div>
-          <span className="color-box past"></span>Past
-        </div>
+       
       </div>
+      <div className="back-btn-container">
+          <button className="back-btn" onClick={() => navigate("/")}>
+            ← Back to Home
+          </button>
+        </div>
     </div>
   );
 };
