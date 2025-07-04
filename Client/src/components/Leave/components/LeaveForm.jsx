@@ -1,13 +1,9 @@
 import { useState } from "react";
-import {
-  FaCalendarAlt,
-  FaMapMarkerAlt,
-  FaUser
-} from "react-icons/fa";
+import { FaCalendarAlt, FaMapMarkerAlt, FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import "./LeaveForm.css";
 
-const LeaveForm = () => {
+const LeaveForm = ({ onClose, onSuccess }) => {
   const [formData, setFormData] = useState({
     officer: "",
     from: "",
@@ -41,7 +37,8 @@ const LeaveForm = () => {
       if (res.ok) {
         alert("Leave record added successfully!");
         handleReset();
-        navigate("/leave");
+        if (onSuccess) onSuccess();
+        if (onClose) onClose();
       } else {
         alert("Error: " + data.message);
       }
@@ -62,7 +59,11 @@ const LeaveForm = () => {
   };
 
   const handleReturnHome = () => {
-    navigate("/leave");
+    if (onClose) {
+      onClose();
+    } else {
+      navigate("/leave");
+    }
   };
 
   return (

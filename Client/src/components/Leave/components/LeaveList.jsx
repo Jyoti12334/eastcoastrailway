@@ -54,6 +54,12 @@ const LeaveList = ({ fromDate, toDate, isLoggedIn, showLogin }) => {
     fetchLeaves();
   }, [fromDate, toDate, location.pathname]);
 
+  useEffect(() => {
+    const handleRefresh = () => fetchLeaves();
+    window.addEventListener("refreshLeaves", handleRefresh);
+    return () => window.removeEventListener("refreshLeaves", handleRefresh);
+  }, []);
+
   const getDateClass = (from, to) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);

@@ -2,11 +2,14 @@ import { useState } from "react";
 import { FaRegUser, FaUnlockAlt } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../assets/Logo.png";
+import LeaveForm from "../../components/Leave/components/LeaveForm";
 import "./Navbar.css";
 
 const Navbar = ({ showLogin, setShowLogin, isLoggedIn, setIsLoggedIn }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showLeaveForm, setShowLeaveForm] = useState(false);
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -31,7 +34,8 @@ const Navbar = ({ showLogin, setShowLogin, isLoggedIn, setIsLoggedIn }) => {
     }
 
     if (isLeaveModule) {
-      navigate("/leave/leave/form");
+      setShowLeaveForm(true);
+      // navigate("/leave/leave/form");
     } else if (isAppointmentModule) {
       navigate("/appointment", { state: { openForm: true } });
     }
@@ -86,7 +90,7 @@ const Navbar = ({ showLogin, setShowLogin, isLoggedIn, setIsLoggedIn }) => {
             <button
               className="add-appointment-btn"
               onClick={handleAddAction}
-              style={{ marginRight: "10px" }}
+              style={{ marginRight: "10px", border: "none" }}
             >
               {isLeaveModule ? "Add Leave" : "Add Appointment"}
             </button>
@@ -155,6 +159,18 @@ const Navbar = ({ showLogin, setShowLogin, isLoggedIn, setIsLoggedIn }) => {
               </form>
             </div>
           </div>
+        </div>
+      )}
+      {showLeaveForm && isLeaveModule && (
+        <div className="leave-popup-container">
+          <LeaveForm
+            onClose={() => setShowLeaveForm(false)}
+            onSuccess={() => {
+              setShowLeaveForm(false);
+              const refreshEvent = new CustomEvent("refreshLeaves");
+              window.dispatchEvent(refreshEvent);
+            }}
+          />
         </div>
       )}
     </>

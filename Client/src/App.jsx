@@ -3,10 +3,15 @@ import {
   Route,
   BrowserRouter as Router,
   Routes,
-  useNavigate
+  useNavigate,
 } from "react-router-dom";
 
-import { FaCalendarCheck, FaRegClock, FaSuitcase, FaUsers } from "react-icons/fa";
+import {
+  FaCalendarCheck,
+  FaRegClock,
+  FaSuitcase,
+  FaUsers,
+} from "react-icons/fa";
 import Navbar from "./components/Navbar/Navbar.jsx";
 import Appointment from "./Pages/Appointments/Appointments.jsx";
 import Leave from "./Pages/Leave/Leave.jsx";
@@ -14,7 +19,7 @@ import Leave from "./Pages/Leave/Leave.jsx";
 function HomePageSelector() {
   const navigate = useNavigate();
 
- const sectionStyle = {
+  const sectionStyle = {
     marginTop: "100px",
     padding: "0 20px",
     maxWidth: "1200px",
@@ -55,17 +60,33 @@ function HomePageSelector() {
     <div
       style={{
         minHeight: "100vh",
-       
+
         fontFamily: "Segoe UI, sans-serif",
         textAlign: "center",
       }}
     >
       <div style={sectionStyle}>
-        <h1 style={{ fontSize: "3rem", fontWeight: "bold", color: "#333" , marginTop: "150px"}}>
+        <h1
+          style={{
+            fontSize: "3rem",
+            fontWeight: "bold",
+            color: "#333",
+            marginTop: "150px",
+          }}
+        >
           Welcome to Admin Portal
         </h1>
-        <p style={{ fontSize: "1.2rem", color: "#555", maxWidth: "800px", margin: "0 auto", marginTop: "10px" }}>
-          Efficiently manage all appointments and staff leaves and tours from one centralized platform.
+        <p
+          style={{
+            fontSize: "1.2rem",
+            color: "#555",
+            maxWidth: "800px",
+            margin: "0 auto",
+            marginTop: "10px",
+          }}
+        >
+          Efficiently manage all appointments and staff leaves and tours from
+          one centralized platform.
         </p>
 
         <div
@@ -82,11 +103,13 @@ function HomePageSelector() {
             onClick={() => navigate("/leave")}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = "translateY(-8px)";
-              e.currentTarget.style.boxShadow = "0 16px 32px rgba(0, 0, 0, 0.2)";
+              e.currentTarget.style.boxShadow =
+                "0 16px 32px rgba(0, 0, 0, 0.2)";
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow = "0 8px 32px rgba(31, 38, 135, 0.2)";
+              e.currentTarget.style.boxShadow =
+                "0 8px 32px rgba(31, 38, 135, 0.2)";
             }}
           >
             <FaSuitcase style={{ fontSize: "3rem", color: "#1976d2" }} />
@@ -103,11 +126,13 @@ function HomePageSelector() {
             onClick={() => navigate("/appointment")}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = "translateY(-8px)";
-              e.currentTarget.style.boxShadow = "0 16px 32px rgba(0, 0, 0, 0.2)";
+              e.currentTarget.style.boxShadow =
+                "0 16px 32px rgba(0, 0, 0, 0.2)";
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow = "0 8px 32px rgba(31, 38, 135, 0.2)";
+              e.currentTarget.style.boxShadow =
+                "0 8px 32px rgba(31, 38, 135, 0.2)";
             }}
           >
             <FaCalendarCheck style={{ fontSize: "3rem", color: "#e91e63" }} />
@@ -128,8 +153,10 @@ function HomePageSelector() {
       </div>
 
       {/* Features Section */}
-      <div style={{ ...sectionStyle, marginTop: "100px" }}>
-        <h2 style={{ fontSize: "2rem", marginBottom: "20px", color: "#333" }}>
+      <div
+        style={{ ...sectionStyle, marginTop: "100px", marginBottom: "60px" }}
+      >
+        <h2 style={{ fontSize: "2rem", marginBottom: "40px", color: "#333" }}>
           Why Use Our System?
         </h2>
         <div
@@ -152,25 +179,11 @@ function HomePageSelector() {
             <FaUsers style={{ fontSize: "2.5rem", color: "#d81b60" }} />
             <h3>Easy Coordination</h3>
             <p style={{ color: "#555" }}>
-              Keep departments aligned through a centralized appointment & leave hub.
+              Keep departments aligned through a centralized appointment & leave
+              hub.
             </p>
           </div>
         </div>
-      </div>
-
-      {/* Quote Section */}
-      <div style={{ ...sectionStyle, marginTop: "100px" }}>
-        <p
-          style={{
-            fontStyle: "italic",
-            fontSize: "1.1rem",
-            color: "#444",
-            maxWidth: "600px",
-            margin: "0 auto",
-          }}
-        >
-          "Efficiency is doing things right; effectiveness is doing the right things." — Peter Drucker
-        </p>
       </div>
     </div>
   );
